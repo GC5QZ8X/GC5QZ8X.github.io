@@ -754,6 +754,7 @@ function initialize() {
 	console.log(initialized);
 	initialized++;
 	if( initialized == 2 ) {
+		renderSlide(1);
 		$('.carousel').carousel({
 			interval: false // no automatic cycling
 			});
