@@ -716,6 +716,7 @@ function decryptSlide(encryptedSlide, key) {
 }
 
 function renderSlide(slideIndex) {
+	console.log("renderSlide()");
 	if(slideData[slideIndex].html) { // if it's the result slide
 		newSlideNode = emptyResultSlide.cloneNode(true);
 		$(newSlideNode).find(".slideInner")[0].innerHTML = slideData[slideIndex].html;
@@ -751,6 +752,7 @@ function renderSlide(slideIndex) {
 $( document ).ready( initialize );
 
 function initialize() {
+	console.log("initialize()");
 	renderSlide(1);
 	$('.carousel').carousel({
 		interval: false // no automatic cycling
