@@ -492,7 +492,6 @@ var slideData = [{
 var currentSlide = 0;
 var maxSlide = 1;
 </script>
-<script src="https://www.youtube.com/iframe_api"></script> <!-- source: https://www.youtube.com/ (obviously) -->
 <script src="jquery-1.11.1.min.js"></script> <!-- source: http://jquery.com/ -->
 <script src="bootstrap/js/bootstrap.min.js"></script><!-- source: http://getbootstrap.com/ -->
 <script src="aes.js"></script><!-- source: https://code.google.com/p/slowaes/ -->
@@ -589,7 +588,6 @@ emptyQuestionSlide = $("#empty-question-slide")[0];
 emptyVideoSlide = $("#empty-video-slide")[0];
 emptyResultSlide = $("#empty-result-slide")[0];
 //$("input[type=text]").popover({ placement: "bottom", trigger: "manual", title: "falsche Antwort", content: "" });
-renderSlide(1);
 
 function hash(input) {
 	return Sha256.hash(input + HASH_SALT);
@@ -751,11 +749,16 @@ function renderSlide(slideIndex) {
 
 $( document ).ready( initialize );
 
+var initialized = 0;
 function initialize() {
-	$('.carousel').carousel({
-		interval: false // no automatic cycling
-		});
-	
+	console.log(initialized);
+	initialized++;
+	if( initialized == 2 ) {
+		$('.carousel').carousel({
+			interval: false // no automatic cycling
+			});
+		goToSlide(0);
+	}
 }
 
 function goLeft() {
@@ -910,7 +913,8 @@ function popoverClick(event) {
 //
 
 function onYouTubeIframeAPIReady() {
-	goToSlide(0);
+	console.log("youtube ready");
+	initialize();
 }
 
 function onYoutubePlayerStateChange(event) {
@@ -941,5 +945,6 @@ encryptSlides([
 
 
 </script>
+<script src="https://www.youtube.com/iframe_api"></script> <!-- source: https://www.youtube.com/ (obviously) -->
 </body>
 </html>
