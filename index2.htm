@@ -752,6 +752,7 @@ $( document ).ready( initialize );
 
 var initialized = 0;
 function initialize() {
+	console.log(initialized);
 	initialized++;
 	if( initialized == 2 ) {
 		$('.carousel').carousel({
@@ -913,6 +914,7 @@ function popoverClick(event) {
 //
 
 function onYouTubeIframeAPIReady() {
+	console.log("youtube ready");
 	initialize();
 }
 
