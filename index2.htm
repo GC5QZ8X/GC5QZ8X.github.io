@@ -716,7 +716,6 @@ function decryptSlide(encryptedSlide, key) {
 }
 
 function renderSlide(slideIndex) {
-	console.log("renderSlide()");
 	if(slideData[slideIndex].html) { // if it's the result slide
 		newSlideNode = emptyResultSlide.cloneNode(true);
 		$(newSlideNode).find(".slideInner")[0].innerHTML = slideData[slideIndex].html;
@@ -751,13 +750,15 @@ function renderSlide(slideIndex) {
 
 $( document ).ready( initialize );
 
+var initialized = 0;
 function initialize() {
-	console.log("initialize()");
-	renderSlide(1);
-	$('.carousel').carousel({
-		interval: false // no automatic cycling
-		});
-	
+	initialized++;
+	if( initialized == 2 ) {
+		$('.carousel').carousel({
+			interval: false // no automatic cycling
+			});
+		goToSlide(0);
+	}
 }
 
 function goLeft() {
@@ -912,7 +913,7 @@ function popoverClick(event) {
 //
 
 function onYouTubeIframeAPIReady() {
-	goToSlide(0);
+	initialize();
 }
 
 function onYoutubePlayerStateChange(event) {
